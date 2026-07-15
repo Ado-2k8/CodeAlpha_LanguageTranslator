@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Language Translator — CodeAlpha</title>
+
+  <!-- Fonts: Sora (display), Inter (body), IBM Plex Mono (utility/data) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap"
+    rel="stylesheet"
+  />
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Ambient animated background blobs (pure decoration, aria-hidden) -->
+  <div class="aurora" aria-hidden="true">
+    <span class="aurora__blob aurora__blob--teal"></span>
+    <span class="aurora__blob aurora__blob--violet"></span>
+    <span class="aurora__blob aurora__blob--coral"></span>
+  </div>
+
+  <main class="page">
+    <header class="page__header">
+      <p class="eyebrow">CodeAlpha · AI Internship · Task 1</p>
+      <h1 class="title">Language&nbsp;Translator</h1>
+      <p class="subtitle">Write, pick two languages, and translate instantly.</p>
+    </header>
+
+    <!-- ============================================================ -->
+    <!-- Main translator card                                          -->
+    <!-- ============================================================ -->
+    <section class="card" aria-label="Translator">
+
+      <!-- Language selectors + swap button -->
+      <div class="lang-bar">
+        <div class="lang-select">
+          <label class="lang-select__label" for="source-lang">Source language</label>
+          <select id="source-lang" class="lang-select__control">
+            <option value="auto">Detecting…</option>
+          </select>
+        </div>
+
+        <button
+          id="swap-btn"
+          class="swap-btn"
+          type="button"
+          aria-label="Swap source and target languages"
+          title="Swap languages"
+        >
+          <svg viewBox="0 0 24 24" class="swap-btn__icon" aria-hidden="true">
+            <path d="M7 7h11l-3.5-3.5M17 17H6l3.5 3.5" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          </svg>
+        </button>
+
+        <div class="lang-select">
+          <label class="lang-select__label" for="target-lang">Target language</label>
+          <select id="target-lang" class="lang-select__control">
+            <option value="en">Loading…</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Two text panels -->
+      <div class="panels">
+
+        <!-- Source panel -->
+        <div class="panel">
+          <textarea
+            id="source-text"
+            class="panel__textarea"
+            placeholder="Type or paste your text here…"
+            maxlength="5000"
+            autofocus
+          ></textarea>
+          <div class="panel__footer">
+            <span id="source-count" class="char-count">0 / 5000</span>
+            <div class="panel__actions">
+              <button id="listen-source-btn" class="icon-btn" type="button" title="Listen to source text" aria-label="Listen to source text">
+                <svg viewBox="0 0 24 24" class="icon-btn__icon" aria-hidden="true">
+                  <path d="M4 9v6h4l5 5V4L8 9H4z" fill="currentColor"/>
+                  <path d="M16.5 8.5a5 5 0 010 7" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+                  <path d="M19 6a9 9 0 010 12" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" opacity="0.6"/>
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Target panel -->
+        <div class="panel panel--target">
+          <textarea
+            id="target-text"
+            class="panel__textarea"
+            placeholder="Translation appears here…"
+            readonly
+          ></textarea>
+          <div class="panel__footer">
+            <span id="target-status" class="char-count"></span>
+            <div class="panel__actions">
+              <button id="listen-target-btn" class="icon-btn" type="button" title="Listen to translation" aria-label="Listen to translation">
+                <svg viewBox="0 0 24 24" class="icon-btn__icon" aria-hidden="true">
+                  <path d="M4 9v6h4l5 5V4L8 9H4z" fill="currentColor"/>
+                  <path d="M16.5 8.5a5 5 0 010 7" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+                  <path d="M19 6a9 9 0 010 12" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" opacity="0.6"/>
+                </svg>
+              </button>
+              <button id="copy-btn" class="icon-btn" type="button" title="Copy translation" aria-label="Copy translation">
+                <svg viewBox="0 0 24 24" class="icon-btn__icon" aria-hidden="true">
+                  <rect x="9" y="9" width="11" height="11" rx="2" stroke="currentColor" stroke-width="1.8" fill="none"/>
+                  <path d="M5 15V6a2 2 0 012-2h9" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Primary action -->
+      <div class="cta-row">
+        <button id="translate-btn" class="btn-primary" type="button">
+          <span class="btn-primary__label">Translate</span>
+          <span class="btn-primary__spinner" aria-hidden="true"></span>
+        </button>
+      </div>
+
+      <!-- Inline error banner -->
+      <p id="error-banner" class="error-banner" role="alert" hidden></p>
+    </section>
+
+    <footer class="page__footer">
+      <p>Powered by Google Translate &amp; gTTS · Built for the CodeAlpha AI Internship</p>
+    </footer>
+  </main>
+
+  <!-- Hidden audio players used for text-to-speech playback -->
+  <audio id="audio-source" hidden></audio>
+  <audio id="audio-target" hidden></audio>
+
+  <script src="script.js"></script>
+</body>
+</html>

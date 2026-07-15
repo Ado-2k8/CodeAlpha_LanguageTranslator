@@ -15,12 +15,22 @@ internship (Task 1).
 
 ```
 CodeAlpha_LanguageTranslator/
-├── app.py            # Streamlit UI
+├── app.py            # Streamlit UI (alternative interface)
+├── api.py             # Flask backend for the custom web UI (static/)
+├── static/
+│   ├── index.html      # Custom UI: markup
+│   ├── style.css        # Custom UI: glassmorphism design ("Aurora Dusk" theme)
+│   └── script.js         # Custom UI: API calls, copy-to-clipboard, text-to-speech
 ├── translator.py      # Translation engine (deep-translator wrapper)
 ├── tts.py              # Text-to-speech helper (gTTS wrapper)
 ├── requirements.txt
 └── README.md
 ```
+
+Two interfaces are included:
+- **Custom web UI** (`api.py` + `static/`) — a hand-built, animated glassmorphism design
+  with side-by-side text panels, language swap, copy button, and text-to-speech.
+- **Streamlit UI** (`app.py`) — a simpler, quicker alternative.
 
 ## 🚀 Installation
 
@@ -32,7 +42,13 @@ pip install -r requirements.txt
 
 ## ▶️ Usage
 
-### Web interface (Streamlit)
+### Custom web UI (recommended — glassmorphism design)
+```bash
+python api.py
+```
+Then open http://localhost:5000 in your browser.
+
+### Streamlit UI (alternative)
 ```bash
 streamlit run app.py
 ```
