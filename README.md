@@ -3,7 +3,7 @@
 Language translation tool built as part of the **CodeAlpha** Artificial Intelligence
 internship (Task 1).
 
-## 🎯 Features
+## Features
 
 - Enter text and select **source** and **target** languages from 130+ options.
 - Automatic source-language detection (`auto` option).
@@ -11,7 +11,7 @@ internship (Task 1).
 - **Copy button** to copy the translated text to the clipboard.
 - **Text-to-speech** playback of the translation (via `gTTS`), when supported for that language.
 
-## 📁 Project structure
+## Project structure
 
 ```
 CodeAlpha_LanguageTranslator/
@@ -32,7 +32,7 @@ Two interfaces are included:
   with side-by-side text panels, language swap, copy button, and text-to-speech.
 - **Streamlit UI** (`app.py`) — a simpler, quicker alternative.
 
-## 🚀 Installation
+## Installation
 
 ```bash
 git clone https://github.com/Ado-2k8/CodeAlpha_LanguageTranslator.git
@@ -40,7 +40,7 @@ cd CodeAlpha_LanguageTranslator
 pip install -r requirements.txt
 ```
 
-## ▶️ Usage
+##  Usage
 
 ### Custom web UI (recommended — glassmorphism design)
 ```bash
@@ -59,7 +59,7 @@ Then open the link shown in the terminal (default: http://localhost:8501).
 python translator.py
 ```
 
-## 🧪 Example
+## Example
 
 ```
 Source text: "Good morning, how are you?"
@@ -68,20 +68,20 @@ Target: french
 Translation: "Bonjour, comment allez-vous ?"
 ```
 
-## 🛠️ Tech stack
+## Tech stack
 
 - Python 3
 - Streamlit (user interface)
 - deep-translator (Google Translate backend, no API key required)
 - gTTS (text-to-speech)
 
-## 📌 Notes
+## Notes
 
 - An internet connection is required at runtime, since translation and
   text-to-speech both call external Google services.
 - Not every language supports text-to-speech; the "Listen" button only
   appears when the target language is supported by `gTTS`.
 
-## 👤 Author
+## Author
 
 Project built as part of the AI Internship — CodeAlpha (2026).
